@@ -75,7 +75,40 @@ Spring Data JPA:
 
 H2 Database: Banco de dados em memória
 
+# Aula 9 - Criando Tabela Usuário
+
+- Entidade/Entity: Normalmente é um objeto que vai representar uma tabela
+
+# Aula 10 - Repository
+
+Camada onde se tem os métodos utilizados para alterar/salvar etc os dados, se consegue fazer a comunicação com o banco de dados
+
+- Interface: Um modelo dentro da aplicação, onde se tem os métodos mas não a implementação dos mesmos
+
+JPA já tem alguns métodos definidos por padrão para se comunicar com o banco de dados
+Quando existe o simbolo `<>` significa que a classe recebe um Generator
+
+- Generator: Atributos dinâmicos
+  EX: JpaRepository<Classe_que_o_repository_representa, Tipo_ID> -> JpaRepository<UserModel, UUID>
+
+```java
+//será passado como null pois não foi inicializado [com new]
+private IUserRepository userRepository;
+```
+
+```java
+//O Spring gerencia se precisa ou não inicializar o repository
+@Autowired
+private IUserRepository userRepository;
+```
+
+@Autowired: Spring gerencia o ciclo de vida
+
+# Aula 11 - Validando username
+
+Spring Data permite criar método apenas com `findBy<Nome_Atributo>`. Dessa forma ele já entende que tem que fazer um select com o atributo como referência
+EX:findByUsername; findByName etc
+
 # Referências
 
 - Doc: https://efficient-sloth-d85.notion.site/Maven-d11762457beb4cf7a0ecc83e22f99991
-- Entidade/Entity: Normalmente é um objeto que vai representar uma tabela
