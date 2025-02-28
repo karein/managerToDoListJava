@@ -62,6 +62,20 @@ Ao definir os atributos de uma classe como private, se tem que informar como ele
 
 # Aula 7 - Lombok
 
+Anotation `@Data` adiciona getters e setters em todos os atributos.
+para add apenas os getters seria o `@Getter` e para o setter seria `@Setter`
+
+# Aula 8 - Banco de dados
+
+Spring Data JPA:
+
+    - Um dos projetos do Spring onde se consegue fazer a comunicação com o banco de dados;
+    - Camada de comunicação com o banco de dados;
+    - Utiliza o conceito de ORM, quando se tem um objeto e quer transformar para uma forma que o banco de dados consiga enteder
+
+H2 Database: Banco de dados em memória
+
 # Referências
 
 - Doc: https://efficient-sloth-d85.notion.site/Maven-d11762457beb4cf7a0ecc83e22f99991
+- Entidade/Entity: Normalmente é um objeto que vai representar uma tabela
