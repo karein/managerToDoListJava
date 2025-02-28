@@ -109,6 +109,42 @@ private IUserRepository userRepository;
 Spring Data permite criar método apenas com `findBy<Nome_Atributo>`. Dessa forma ele já entende que tem que fazer um select com o atributo como referência
 EX:findByUsername; findByName etc
 
+# Aula 12 - Utilizando ResponseEntity
+
+- ResponseEntity: Lida com as respostas permitindo gerenciar a resposta removendo a necessidade de criar vários objetos para diferentes situações de retorno
+
+# Aula 13 - Hash da senha
+
+- BCrypt: biblioteca para criptografar senha
+  `.hashToString(<força_da_senha>, <senha_a_ser_criptografada>);`
+
+# Aula 14 - Tabela de Task
+
+Informações da tarefa:
+
+    - ID
+    - Usuário (ID_USUÁRIO)
+    - Descrição
+    - Título
+    - Data Início
+    - Data Término
+    - prioridade
+
+- @GeneratedValue: gera o Id automaticamente;
+- @Column(length = 50): limita a quantidade de caracteres a 50
+
+# Aula 15 - Cadastro de tarefa
+
+- LocalDateTime estrutura: `yyyy-mm-ddTHH:mm:ss`
+
+# Aula 16 - Realizando filtro
+
+Tudo que se tem de web, Spring Boot e outros frameworks são baseados no **servelet** que é a base para qualquer framework web do java.
+
+- @Component: Toda classe que será gerenciada pelo spring, deve ter essa anotação; a classe mais genérica de gerenciamento do spring
+
+# Aula 17 - Continuando a Implementação do Filtro
+
 # Referências
 
 - Doc: https://efficient-sloth-d85.notion.site/Maven-d11762457beb4cf7a0ecc83e22f99991
