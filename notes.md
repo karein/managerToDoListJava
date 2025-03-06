@@ -154,14 +154,17 @@ Fluxo do filter:
     - Validar senha
     - segue viagem
 
-# Aula 18 - Decode da senha
-
 # Aula 18 - Validando rota
 
 realizar filtro para uma rota específica
 `if (serveletPath.equals("/tasks/"))`
 
-# Aula 19 - Setando atributo na request
+# Aula 24 - Update Parcial
+
+- BeanWrapper: Classe do Java; Interface que fornece uma forma de acessar as propriedade de um objeto no java
+- BeanWrapperImpl: Implementação da interface BeanWrapper
+
+- Static: Ao usar o static, não se precisa instanciar a classe
 
 # Referências
 
