@@ -24,8 +24,10 @@ public class FilterTaskAuth extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
     var serveletPath = request.getServletPath();
+    System.out.println("serveletPath" + serveletPath);
 
-    if (serveletPath.equals("/tasks/")) {
+    // considerar todos os caminhos que iniciam com /tasks
+    if (serveletPath.startsWith("/tasks/")) {
       // pega autorização
       var authorization = request.getHeader("Authorization");
       System.out.println(authorization);
