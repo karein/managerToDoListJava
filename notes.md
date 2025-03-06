@@ -145,6 +145,24 @@ Tudo que se tem de web, Spring Boot e outros frameworks são baseados no **serve
 
 # Aula 17 - Continuando a Implementação do Filtro
 
+`implements Filter` trocado por `extends OncePerRequestFilter` pois, ao utilizar o filtro do servelet, ele vai fornecer apenas um servelet request porém, ao se trabalhar com uma construção de api, requisições via HTTP/ comunicação via REST [daria ae pra fazer mas] teria que converter todos os _serveletRequest_ e _serveletResponse_ para _HTTPServeletRequest_ e _HttpServeletResponse_. Como o **OncePerRequestFilter** já tem isso é mais fácil trabalhar com ele.
+
+Fluxo do filter:
+
+    - Pegar a autenticação
+    - Validar usuário
+    - Validar senha
+    - segue viagem
+
+# Aula 18 - Decode da senha
+
+# Aula 18 - Validando rota
+
+realizar filtro para uma rota específica
+`if (serveletPath.equals("/tasks/"))`
+
+# Aula 19 - Setando atributo na request
+
 # Referências
 
 - Doc: https://efficient-sloth-d85.notion.site/Maven-d11762457beb4cf7a0ecc83e22f99991
