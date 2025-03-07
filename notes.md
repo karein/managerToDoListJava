@@ -166,6 +166,19 @@ realizar filtro para uma rota específica
 
 - Static: Ao usar o static, não se precisa instanciar a classe
 
+# Aula 26 - Try catch
+
+Exceções tratáveis: ocasionada pelo usuário; erro de dados; erro de validação [Exception]
+Exceções não tratáveis: ocasionada pelo sistema (ex: quando o sistema esta fora do ar)
+
+não foi add o try catch no taskController pois no model está utilizando não somente o lombok mas principalmentee o RequestBody que por baixo dos panos faz o por baixo dos panos faz o set no momento que se acessa o create, não se consegue facilmente nível de método recuperar a exceção.
+
+- @ControllerAdvice: Uma anotação do spring usada para definir classes globais no momento e tratamento de exceções
+
+# Aula - Live reload
+
+rodar projeto com comando: mvn spring-boot:run
+
 # Referências
 
 - Doc: https://efficient-sloth-d85.notion.site/Maven-d11762457beb4cf7a0ecc83e22f99991
