@@ -179,6 +179,37 @@ não foi add o try catch no taskController pois no model está utilizando não s
 
 rodar projeto com comando: mvn spring-boot:run
 
+# Aula - Deploy
+
+render.com - ambiente gratuito
+
+-- vai construir uma imagem da aplicação no render. Imagem inicial ubuntu
+`FROM ubuntu:latest AS build`
+
+-- atualizar bibliotecas e instalar java 17
+-- -y -> informar sim para todas as perguntas
+
+```Dockerfile
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+```
+
+-- copoa todo o conteudo do diretório da imagen ques está sendo contruida
+`COPY . .`
+
+-- instala o maven e cria 2 arquivos na pasta target, o .jar e o .jar.original. Os arquivos são nomeados de acordo com o <version>(**não do <parent>**) informado no pom.xml Ex: <version>0.0.1-SNAPSHOT</version>
+RUN apt-get install maven -y
+RUN mvn clean install
+
+-- expões a porta 8080 da aplicação
+EXPOSE 8080
+
+-- copia o arquivo.jar para o app no render
+COPY --from=build /target/todolist-1.0.0.jar app.jar
+
+-- executa os comandos pois por padrão ao se executar uma aplicação .jar, para conseguir executar ela pela linha de comando, se executa esses comandos. Ex: java -jar target/todolist-1.0.0.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
 # Referências
 
 - Doc: https://efficient-sloth-d85.notion.site/Maven-d11762457beb4cf7a0ecc83e22f99991
