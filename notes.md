@@ -201,6 +201,9 @@ RUN apt-get install openjdk-17-jdk -y
 RUN apt-get install maven -y
 RUN mvn clean install
 
+-- imagem base para rodar a aplicação
+FROM openjdk:17-jdk-slim
+
 -- expões a porta 8080 da aplicação
 EXPOSE 8080
 
