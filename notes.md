@@ -1,43 +1,63 @@
-# Aula 1
+# Aula - Configurando o ambiente
 
 ## Maven
 
-gerenciador de dependências
-update-alternatives: a usar /usr/share/maven/bin/mvn para disponibilizar /usr/bin/mvn (mvn) em modo auto
+O Maven é um gerenciador de dependências para projetos Java. Ele facilita a inclusão de bibliotecas externas, o controle de versões e o gerenciamento de builds.
 
-# Aula 2 - Criando Estrutura Projeto
+- update-alternatives: No Linux, o Maven pode ser configurado com o comando `update-alternatives`. Ele permite configurar qual versão do Maven será usada no sistema. Por exemplo, ao rodar o comando, você define que o Maven será acessado por meio do caminho /usr/share/maven/bin/mvn e disponível como /usr/bin/mvn no terminal em modo automático.
 
-- Group: por convenção, se utiliza o nome da empresa de trás para frente
-  EX: www.danieleleao.com.br -> br.com.danieleleao
+# Aula - Criando Estrutura Projeto
 
-- JAR: Gera um arquivo executável. Se consegue utilizar o próprio java para rodar o executável .jar, sem precisar de outro servidor.
-- WAR: Mais utilizado para aplicações web, gera um arquivo para ser executado é necessário um container.
+Quando estamos criando um projeto Java, é importante seguir algumas convenções para garantir que o código seja bem organizado e compreensível por outras pessoas.
+
+- **Group**: Por convenção, utiliza-se o nome do domínio da empresa, mas de forma invertida. Isso ajuda a garantir que os nomes dos grupos sejam únicos e sigam a mesma lógica de organização. Por exemplo:
+
+  - Se o domínio da empresa for www.danieleleao.com.br, o Group ID seria: br.com.danieleleao
+
+- **JAR (Java ARchive)**: É um formato de arquivo compactado usado para distribuir aplicações Java. Um arquivo JAR é **executável**, ou seja, você pode rodá-lo diretamente com o comando java -jar, sem precisar de um servidor externo.
+- **WAR (Web ARchive)**:É um formato utilizado para aplicações web. Ao contrário do JAR, um arquivo WAR **não é executável diretamente**. Para rodar uma aplicação WAR, é necessário um **container** de servlets, como o Apache Tomcat, que é responsável por gerenciar e executar a aplicação.
 
 ## Spring Boot
 
-Apesar de criar uma plicação web, é possível usar o .jar pois ele tem um servidor embarcado dentro da aplicação. A usar o .jar ele já adiciona um container Tomcat para rodar a aplicação.
+O Spring Boot é uma ferramenta que simplifica a criação de aplicações Java, principalmente aplicações web.
 
-O Spring Boot se tornou muito popular pois, antes se tinha que fazer muitas configurações, e para subir um projeto spring com por exemplo spring framework, eram necessários muitos arquivos de configuração e muitas coisas para gerenciar. Com Spring Boot ele já tem as dependências que gerenciam essas configurações.
+- Servidor Embutido: Uma das principais vantagens do Spring Boot é que ele permite que você crie um arquivo JAR executável com um servidor embutido (como o Tomcat), ou seja, você não precisa configurar um servidor externo para rodar sua aplicação. Basta rodar o arquivo .jar e o servidor já está lá, pronto para executar a aplicação.
 
-# Aula 3 - Entendendo Estrutura
+- Por que o Spring Boot é popular? Antes do Spring Boot, criar uma aplicação web com o Spring Framework exigia muita configuração manual. Havia vários arquivos de configuração para definir dependências, integrar componentes e configurar o servidor. O Spring Boot automatiza grande parte dessas configurações, fornecendo dependências padrão e uma estrutura já pronta.
+
+# Aula - Entendendo Estrutura
 
 Toda classe inicia com um package que é o pacote onde essa classe está inserida.
 
-- @SpringBootApplication: define que a classe TodolistApplication é a classe inicial do projeto.
+- `@SpringBootApplication`: Anotação é utilizada para marcar a classe principal da aplicação. Define por exemplo, que a classe TodolistApplication, é o ponto de entrada do projeto.
 
-Por baixo dos panos, o springBoot coloca esse método main para executar a aplicação e quando ele faz o `SpringApplication.run(TodolistApplication.class, args);` passando o nome da classe, ele tem um Tomcat por trá para rodar a aplicação
+- **Funcionamento Interno**: Por baixo dos panos, o Spring Boot automaticamente gera o método main() na sua classe principal, que chama SpringApplication.run(TodolistApplication.class, args);`. Esse método é responsável por inicializar o contexto do Spring, bem como iniciar o servidor embutido (geralmente Tomcat), responsável por executar a aplicação.
 
-# Aula 4 - Entendendo o que é Controller
+# Aula - Entendendo o que é Controller
 
-- Controller: Utilizada para ser a camada entre a requisição e as demais camada. É quem recebe a requisição do usuário
+- Controller: Utilizada para ser a camada entre a requisição e as demais camada. Ele é responsável por receber as requisições HTTP e retornar as respostas adequadas.
 
-@Controller vs @RestController
+**@Controller X @RestController**
 
-- Controller: Utilizado quando se quer criar por exemplo uma estrutura onde se tenha páginas, uma flexibilidade maior de retornar não só objetos
-  RestController: Quando se está construindo uma API com conceitos de REST
+- **@Controller**: Utilizado quando você deseja criar uma aplicação web tradicional com Spring, onde pode haver renderização de páginas. uma flexibilidade maior de retornar de retornar uma página web (como um arquivo .html) além de objetos e dados.
 
-Ao se trabalhar com a spring ou conceito se api, se tem sempre uma **classe** e dentro dela um **método** java
-estrutura: <modificador> <tipo_retorno> <nome_metodo>(<parametros>){} -> public String primeiraMensagem(){}
+- **@RestController**:é um controlador especial usado para serviços RESTFul e o equivalente a @Controller + @ResponseBody. Usado quando se está construindo uma API com conceitos de REST.
+
+Ao se trabalhar com a spring ou conceito se api, se tem sempre uma **classe** e dentro dela um **método** java.
+
+Estrutura do método:
+
+```java
+  <modificador> <tipo_retorno> <nome_metodo>(<parametros>){
+    // corpo do método
+  }
+```
+
+Exemplo do método:
+
+```java
+  public String primeiraMensagem(){}
+```
 
 Métodos de requisição HTTP
 
@@ -47,33 +67,63 @@ Métodos de requisição HTTP
 - DELETE: Remover um dado
 - PATCH: Alterar somente uma parte da info/dado
 
-# Aula 5 - Funcionalidade de usuário
+# Aula - Funcionalidade de usuário
 
-Nome da classe deve ser igual ao nome do arquivo.
+Ao criar classes em Java, algumas convenções e boas práticas ajudam a manter o código organizado e compreensível.
 
-O tipo **void** é usado quando não se quer ter retorno
+- **Nome da classe e do arquivo**: Por convenção, o nome da classe deve ser igual ao nome do arquivo. Por exemplo, em uma classe chamada UserModel, o arquivo deverá se chamar UserModel.java.
 
-Ao usar o **private** nos atributos, os mesmo não podem ser acessados por outras classes.
-EX: ao definir-los como private no UserModel, o name não poderá ser acessado pelo `System.out.println(userModel.name);` do Controller
+- **Tipo** `void`: O tipo void é utilizado quando um método não retorna nenhum valor. Ou seja, o método executa uma ação, mas não fornece um valor de volta. Por exemplo:
 
-# Aula 6 - Getters e Setters
+```
+public void saveUser(User user) {}
+```
 
-Ao definir os atributos de uma classe como private, se tem que informar como eles poderão ser acessados por outras classes. Dessa forma se usam os `getters` e `setters`
+- **Modificador private**: Ao usar o **private** nos atributos, os mesmo não podem ser acessados por outras classes. Por exemplo:
 
-# Aula 7 - Lombok
+```java
+public class UserModel {
+    private String name;
 
-Anotation `@Data` adiciona getters e setters em todos os atributos.
-para add apenas os getters seria o `@Getter` e para o setter seria `@Setter`
+    // Não é possível acessar diretamente em outra classe etc
+    // System.out.println(userModel.name); // Vai gerar erro
+}
+```
+
+# Aula - Getters e Setters
+
+Ao definir os atributos de uma classe como private, se tem que informar como eles poderão ser acessados por outras classes. Isso é feito através dos `getters` e `setters`
+
+- **Getter**: É o método que permite acessar o valor de um atributo private
+- **Setter**: É o método utilizado para modificar o valor de um atributo private.
+
+```java
+public String getName() {
+    return name;
+}
+public void setName(String name) {
+    this.name = name;
+}
+```
+
+# Aula - Lombok
+
+O Lombok é uma biblioteca que reduz a quantidade de código em Java, facilitando a criação de métodos repetitivos como getters, setters, toString(), entre outros.
+
+- `@Data`: A anotação @Data gera automaticamente getters, setters para todos os atributos da classe. Ao usar essa anotação, você não precisa escrever manualmente os métodos.  
+  Para gerar apenas os getters ou setters individualmente, pode usar essas anotações específicas `@Getter` e `@Setter`.
 
 # Aula 8 - Banco de dados
 
-Spring Data JPA:
+**Spring Data JPA**:
 
-    - Um dos projetos do Spring onde se consegue fazer a comunicação com o banco de dados;
-    - Camada de comunicação com o banco de dados;
-    - Utiliza o conceito de ORM, quando se tem um objeto e quer transformar para uma forma que o banco de dados consiga enteder
+- facilita a comunicação entre a aplicação e o banco de dados, utilizando o conceito de ORM (Object-Relational Mapping)
+- Se pode trabalhar com objetos Java e o JPA (Java Persistence API) se encarrega de transformar esses objetos em um formato que o banco de dados entenda
+- Um dos projetos do Spring onde se consegue fazer a comunicação com o banco de dados;
+- Camada de comunicação com o banco de dados;
+- Utiliza o conceito de ORM (Object-Relational Mapping), quando se tem um objeto e quer transformar para uma forma que o banco de dados consiga entender.
 
-H2 Database: Banco de dados em memória
+**H2 Database**: Banco de dados relacional utilizado principalmente em cenários de desenvolvimento e teste devido à sua facilidade de configuração. funciona em memória, o que significa que o H2 pode ser configurado para manter os dados apenas durante a execução da aplicação, ou seja, os dados são armazenados temporariamente e perdidos quando a aplicação é desligada.
 
 # Aula 9 - Criando Tabela Usuário
 
